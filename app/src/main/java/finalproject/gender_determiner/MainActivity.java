@@ -90,22 +90,26 @@ public final class MainActivity extends AppCompatActivity {
                             if (response.getString("gender").equals("null")) {
                                 outcomereview.setText("not found");
                             } else {
-                                String name = "name: " + response.getString("name");
-                                String gender = "gender: " + response.getString("gender");
-                                String probability = "accuracy: " + response.getString("probability");
-                                String count = "count: " + response.getInt("count");
+                                String name = "The name is : " + response.getString("name");
+                                String gender = "The gender is : " + response.getString("gender");
+                                double probability = Double.parseDouble(response.getString("probability")) * 100;
+                                String count = "The count is : " + response.getInt("count");
                                 //String country_idAppend = "country id: " + response.getString("country_id");
                                 outcomereview.setText("");
                                 outcomereview.append(name + "\n");
                                 outcomereview.append(gender + "\n");
-                                outcomereview.append(probability + "\n");
+                                outcomereview.append("The Probability is : " + probability + "%\n");
                                 outcomereview.append(count + "\n");
                                 if (inputCountryCode2.equals("")) {
                                     outcomereview.append("Country id : World Wide\n");
                                 } else {
                                     outcomereview.append("Country id : " + inputCountryCode2 + "\n");
                                 }
-                                //myTextViewResult.append(country_idAppend+ "\n");
+                                if (response.getString("gender").equals("male")) {
+                                    outcomereview.append("You should call him Mr." + response.getString("name") + "\n");
+                                } else {
+                                    outcomereview.append("You should call her Ms." + response.getString("name") + "\n");
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
